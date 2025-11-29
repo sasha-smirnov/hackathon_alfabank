@@ -111,7 +111,7 @@ select {
 }
 
 .shap-neg {
-  background: var(--alfa-red);
+  background: #ef3124;
 }
 
 .shap-impact {
@@ -120,7 +120,8 @@ select {
 
 /* Recommendations */
 .products-grid {
-  display: grid;
+  display: flex;
+  flex-wrap: wrap;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 16px;
 }

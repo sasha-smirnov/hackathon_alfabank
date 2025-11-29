@@ -1,32 +1,23 @@
 import React, { useState } from "react";
 import "./ModelTabs.css";
 
-export default function ModelTabs({ onChange }) {
-  const tabs = [
-    { id: "income", label: "Доходы" },
-    { id: "credit", label: "Кредитный риск" },
-    { id: "salary", label: "Зарплата" },
-    { id: "behaviour", label: "Поведение" },
-    { id: "style", label: "Стиль трат"},
-    { id: "invest", label: "Инвестиции"},
-  ];
+export default function ModelTabs({ tabs, onChange }) {
+  const [active, setActive] = useState(tabs[0].value);
 
-  const [active, setActive] = useState("income");
-
-  const handleClick = (id) => {
-    setActive(id);
-    onChange && onChange(id);
+  const handleClick = (val) => {
+    setActive(val);
+    onChange(val);
   };
 
   return (
-    <div className="tabs_bg">
-      {tabs.map((tab) => (
+    <div className="tabs-bg">
+      {tabs.map((t) => (
         <button
-          key={tab.id}
-          className={`tab-btn ${active === tab.id ? "active" : ""}`}
-          onClick={() => handleClick(tab.id)}
+          key={t.value}
+          className={`tab-btn ${active === t.value ? "active" : ""}`}
+          onClick={() => handleClick(t.value)}
         >
-          {tab.label}
+          {t.label}
         </button>
       ))}
     </div>

@@ -12,7 +12,6 @@ export default function ShapExplanation({ features, loading }) {
 
   return (
     <div className="card">
-      <ModelTabs onChange={setCategory}/>
       <h2>Почему модель решила так?</h2>
 
       {loading && <p>Считаем вклад признаков…</p>}
@@ -25,6 +24,17 @@ export default function ShapExplanation({ features, loading }) {
 
       {!loading && features && features.length > 0 && (
         <div className="shap-list">
+          <ModelTabs
+            tabs={[
+              { label: "Доходы", value: "income" },
+              { label: "Кредитный риск", value: "risk" },
+              { label: "Зарплата", value: "salary" },
+              { label: "Поведение", value: "behavior" },
+              { label: "Стиль трат", value: "spending" },
+              { label: "Инвестиции", value: "invest" }
+            ]}
+            onChange={setCategory}
+          />
           {features.map((f) => {
             const width = Math.min(Math.abs(f.impact) * 100, 100); // impact в условных единицах 0–1
             const sign = f.impact >= 0 ? "+" : "−";

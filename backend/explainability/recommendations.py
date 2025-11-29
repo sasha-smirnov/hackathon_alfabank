@@ -1,6 +1,5 @@
 from typing import Dict, Any, Optional, List
 
-
 def get_income_segment(predicted_income: float) -> str:
     if predicted_income < 40_000:
         return "low_income"
@@ -47,7 +46,8 @@ def build_recommendations(predicted_income: float,
             "code": "basic_debit",
             "title": "Базовая дебетовая карта с кэшбэком",
             "priority": 2,
-            "reason": "Низкий доход — без лишней кредитной нагрузки"
+            "reason": "Низкий доход — без лишней кредитной нагрузки",
+            "img": "debit.png"
         })
         reasons.append("Доход ниже 40 000 ₽ — приоритет базовые продукты")
 
@@ -56,13 +56,15 @@ def build_recommendations(predicted_income: float,
             "code": "classic_credit_card",
             "title": "Классическая кредитная карта",
             "priority": 2,
-            "reason": "Стабильный доход позволяет пользоваться кредитным лимитом"
+            "reason": "Стабильный доход позволяет пользоваться кредитным лимитом",
+            "img": "credit.png"
         })
         products.append({
             "code": "savings_account",
             "title": "Накопительный счёт",
             "priority": 3,
-            "reason": "Можно откладывать часть дохода"
+            "reason": "Можно откладывать часть дохода",
+            "img": "save.png"
         })
         reasons.append("Доход 40 000–80 000 ₽ — клиент готов к кредитным и сберегательным продуктам")
 
@@ -71,13 +73,15 @@ def build_recommendations(predicted_income: float,
             "code": "premium_credit_card",
             "title": "Премиальная карта с повышенным кэшбэком",
             "priority": 2,
-            "reason": "Повышенный доход — релевантны премиальные опции"
+            "reason": "Повышенный доход — релевантны премиальные опции",
+            "img": "only.png"
         })
         products.append({
             "code": "investment_account",
             "title": "Инвестиционный счёт",
             "priority": 3,
-            "reason": "Часть дохода можно направить в инвестиции"
+            "reason": "Часть дохода можно направить в инвестиции",
+            "img": "investment.png"
         })
         reasons.append("Доход 80 000–150 000 ₽ — клиент готов к более сложным продуктам")
 
@@ -86,13 +90,15 @@ def build_recommendations(predicted_income: float,
             "code": "private_banking",
             "title": "Персональное премиальное обслуживание",
             "priority": 1,
-            "reason": "Высокий доход — релевантен индивидуальный сервис"
+            "reason": "Высокий доход — релевантен индивидуальный сервис",
+            "img": "private.png"
         })
         products.append({
             "code": "advanced_invest",
             "title": "Продвинутые инвестиционные решения",
             "priority": 2,
-            "reason": "Можно предложить сложные портфельные продукты"
+            "reason": "Можно предложить сложные портфельные продукты",
+            "img": "proinvest.png"
         })
         reasons.append("Доход выше 150 000 ₽ — премиальный сегмент клиентов")
 
@@ -103,7 +109,8 @@ def build_recommendations(predicted_income: float,
             "code": "debt_consulting",
             "title": "Финансовая консультация по снижению долговой нагрузки",
             "priority": 0,
-            "reason": "Приоритет — стабилизация текущей долговой нагрузки"
+            "reason": "Приоритет — стабилизация текущей долговой нагрузки",
+            "img": "credit_consult.png"
         })
         products = [
             p for p in products

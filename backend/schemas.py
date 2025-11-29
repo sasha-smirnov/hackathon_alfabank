@@ -25,8 +25,9 @@ class RecommendRequest(BaseModel):
 class Product(BaseModel):
     code: str
     title: str
-    priprity: Optional[str] = None
+    priority: int
     reason: Optional[str] = None
+    img: Optional[str] = None
 
 class RecommendResponse(BaseModel):
     products: List[Product]
