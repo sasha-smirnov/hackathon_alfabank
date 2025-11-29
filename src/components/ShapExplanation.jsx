@@ -1,9 +1,18 @@
 // src/components/ShapExplanation.jsx
-import React from "react";
+import React, { useState } from "react";
+import ModelTabs from "./ModelTabs";   // <-- добавили импорт
 
 export default function ShapExplanation({ features, loading }) {
+  const [category, setCategory] = useState("income");
+
+  const filteredFeatures =
+    category === "income"
+      ? features
+      : features.filter((f) => f.category === category);
+
   return (
     <div className="card">
+      <ModelTabs onChange={setCategory}/>
       <h2>Почему модель решила так?</h2>
 
       {loading && <p>Считаем вклад признаков…</p>}
