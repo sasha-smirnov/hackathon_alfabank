@@ -27,6 +27,16 @@ threadpoolctl==3.6.0
 tqdm==4.67.1
 typing_extensions==4.15.0
 tzdata==2025.2
+<<<<<<< HEAD
 алокалоалалалалал
 алокалоалалалалал
 алалклавлул
+=======
+fastapi==0.115.0
+uvicorn==0.30.1
+pandas==2.0.3
+numpy==1.24.4
+catboost==1.2.3
+shap==0.43.0
+joblib==1.3.2
+>>>>>>> 924ef8ea36bafca8ae1cdf9e31e0a95cec7a252f

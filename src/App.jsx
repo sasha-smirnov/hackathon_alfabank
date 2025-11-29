@@ -6,7 +6,7 @@ import {
   predictIncome,
   explainIncome,
   recommendProducts,
-} from "./api_mock";
+} from "./api";
 
 import ClientSelector from "./components/ClientSelector";
 import IncomeCard from "./components/IncomeCard";
