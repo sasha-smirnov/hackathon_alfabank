@@ -69,9 +69,6 @@ export default function App() {
       <header className="header">
         <div>
           <h1>Прогнозирование дохода клиентов</h1>
-          <p className="muted">
-            Полная демонстрация работы фронта на mock API.
-          </p>
         </div>
 
       </header>
