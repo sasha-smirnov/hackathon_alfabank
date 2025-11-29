@@ -1,21 +1,22 @@
 // src/components/IncomeCard.jsx
 import React from "react";
+import "./IncomeCard.css"
 
 export default function IncomeCard({ income, confidence, loading, error }) {
   return (
-    <div className="card">
-      <h2>Прогноз дохода</h2>
+    <div className="card income-card">
+      <h2 className = "income-title" >Прогноз дохода</h2>
 
       {loading && <p>Считаем прогноз…</p>}
       {error && <p className="error">Ошибка: {error}</p>}
 
       {!loading && !error && income != null && (
         <>
-          <p className="income-value">
-            {income.toLocaleString("ru-RU")} ₽ / мес
-          </p>
+          <h3 className="income-value">
+            <span className="income-number">{income}</span> ₽ / мес
+          </h3>
           {confidence != null && (
-            <p className="muted">
+            <p className="income-confidence">
               Уверенность модели: {(confidence * 100).toFixed(0)}%
             </p>
           )}

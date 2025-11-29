@@ -1,6 +1,5 @@
-// src/components/ShapExplanation.jsx
 import React, { useState } from "react";
-import ModelTabs from "./ModelTabs";   // <-- добавили импорт
+import ModelTabs from "./ModelTabs";
 
 export default function ShapExplanation({ features, loading }) {
   const [category, setCategory] = useState("income");

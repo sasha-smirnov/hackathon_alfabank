@@ -1,0 +1,49 @@
+.client-card {
+  background: #ffffff;
+  border: 1px solid #e3e3e3;
+  border-radius: 40px;
+  padding: 32px 40px;
+  margin-bottom: 32px;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+}
+
+.client-card h2 {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 24px;
+}
+
+.client-select {
+  width: 100%;
+  font-size: 20px;
+  padding: 16px 20px;
+  border-radius: 28px;
+  border: 1px solid #e3e3e3;
+  background: #ffffff;
+  appearance: none;
+  outline: none;
+  cursor: pointer;
+  transition: border 0.2s ease;
+}
+
+.client-select:focus {
+  border-color: #b3b3b3;
+}
+
+.select-card {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.select-card::after {
+  content: "▾";
+  font-size: 36px;
+  color: #333;
+  position: absolute;
+  right: 15px;
+  top: 30%;
+  transform: translateY(15%);
+  pointer-events: none;
+}

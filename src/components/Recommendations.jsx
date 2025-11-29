@@ -4,7 +4,7 @@ import "./ProductCard.css";
 
 export default function Recommendations({ products, loading }) {
   return (
-    <div className="card">
+    <div className="card product-card">
       <h2>Персональные рекомендации</h2>
 
       {loading && <p>Подбираем продукты…</p>}
