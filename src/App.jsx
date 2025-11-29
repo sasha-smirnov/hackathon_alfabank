@@ -12,6 +12,7 @@ import ClientSelector from "./components/ClientSelector";
 import IncomeCard from "./components/IncomeCard";
 import ShapExplanation from "./components/ShapExplanation";
 import Recommendations from "./components/Recommendations";
+import alfa_logo from './assets/alfa_logo.jpg';
 
 export default function App() {
   const [clientId, setClientId] = useState(null);
@@ -64,15 +65,15 @@ export default function App() {
 
   return (
     <div className="page">
+      <img src={alfa_logo} className="corner-img" alt="logo" />
       <header className="header">
         <div>
-          <h1>Модель дохода — демо</h1>
+          <h1>Прогнозирование дохода клиентов</h1>
           <p className="muted">
             Полная демонстрация работы фронта на mock API.
           </p>
         </div>
 
-        <span className="badge">Mock Mode</span>
       </header>
 
       <main className="layout">

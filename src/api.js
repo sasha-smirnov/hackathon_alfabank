@@ -1,6 +1,6 @@
 // src/api.js
 
-const BASE_URL = "http://localhost:5173"; // замени на свой backend
+const BASE_URL = "http://localhost:8000"; // замени на свой backend
 
 async function postJson(path, body) {
   const res = await fetch(`${BASE_URL}${path}`, {

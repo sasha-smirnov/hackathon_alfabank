@@ -14,6 +14,7 @@ export default function ClientSelector({ selectedId, onChange }) {
       <select
         value={selectedId ?? ""}
         onChange={(e) => onChange(e.target.value ? Number(e.target.value) : null)}
+        className="select"
       >
         <option value="">Выберите клиента</option>
         {MOCK_CLIENTS.map((c) => (
