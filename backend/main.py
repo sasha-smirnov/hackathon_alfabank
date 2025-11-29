@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from schemas import PredictRequest, PredictResponse, ExplainRequest, ExplainResponse, RecommendRequest, RecommendResponse
 from services.recommendations import get_mock_recommendations
+from explainability.recommendations import build_recommendations
 
 
 app = FastAPI(title="Income Prediction API (Mock)")
@@ -37,5 +38,16 @@ def explain(req: ExplainRequest):
 
 @app.post("/recommend", response_model=RecommendResponse)
 def recommend(req: RecommendRequest):
-    products = get_mock_recommendations(req.client_id)
-    return RecommendResponse(products=products)
+    pred_income = 100_000
+    shap_explanation = None
+    features_row = {
+        "blacklist_flag": 0,
+        "total_sum": 0,
+        "hdb_bki_total_active_products": 2
+    }
+    rec = build_recommendations(
+        predicted_income=pred_income,
+        features_row=features_row,
+        shap_explanation=shap_explanation,
+    )
+    return RecommendResponse(products=rec["products"])

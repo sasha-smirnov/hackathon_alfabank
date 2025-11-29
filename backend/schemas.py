@@ -23,9 +23,9 @@ class RecommendRequest(BaseModel):
     client_id: int
 
 class Product(BaseModel):
-    id: int
-    name: str
-    description: Optional[str] = None
+    code: str
+    title: str
+    priprity: Optional[str] = None
     reason: Optional[str] = None
 
 class RecommendResponse(BaseModel):
