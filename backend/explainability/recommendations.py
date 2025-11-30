@@ -24,7 +24,7 @@ def get_risk_level(features_row: dict) -> str:
 
     if blacklist == 1:
         return "high"
-    if max_overdue > 0 or total_overdue > 0 or ovrd_sum > 0 or pil_del90 > 0:
+    if float(max_overdue) > 0 or total_overdue > 0 or ovrd_sum > 0 or pil_del90 > 0:
         return "high"
     if active_products + active_products_bki + other_credits + pil_cnt >= 7:
         return "high"
