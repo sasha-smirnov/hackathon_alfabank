@@ -1,7 +1,5 @@
 // src/App.jsx
 import React, { useEffect, useState } from "react";
-
-// подключаем наш моковый API
 import {
   predictIncome,
   explainIncome,
@@ -40,7 +38,6 @@ export default function App() {
       return;
     }
 
-    // ------- 1. Прогноз дохода -------
     setIncomeLoading(true);
     predictIncome(clientId)
       .then((data) => {
@@ -50,13 +47,11 @@ export default function App() {
       .catch((err) => setIncomeError(err.message))
       .finally(() => setIncomeLoading(false));
 
-    // ------- 2. SHAP объяснение -------
     setShapLoading(true);
     explainIncome(clientId)
       .then((data) => setShap(data.features))
       .finally(() => setShapLoading(false));
 
-    // ------- 3. Рекомендации -------
     setProductsLoading(true);
     recommendProducts(clientId)
       .then((data) => setProducts(data.products))
@@ -98,7 +93,7 @@ export default function App() {
 
       <footer className="footer">
         <span className="muted">
-          На реальном backend’e всё заработает без единой строчки изменений.
+          ПИКМЕ
         </span>
       </footer>
     </div>
