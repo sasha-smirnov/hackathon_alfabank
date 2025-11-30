@@ -2,9 +2,12 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from schemas import PredictRequest, PredictResponse, ExplainRequest, ExplainResponse, RecommendRequest, RecommendResponse
-from services.recommendations import get_mock_recommendations
 from explainability.recommendations import build_recommendations
+from explainability.explainability import load_model, load_data, get_shap_explainer, explain_single_prediction, feature_category, feature_names
 
+model = load_model("model.cbm")
+data = load_data("data.csv")
+explainer = get_shap_explainer(model)
 
 app = FastAPI(title="Income Prediction API (Mock)")
 
@@ -20,34 +23,55 @@ app.add_middleware(
 def health():
     return {"status": "ok"}
 
-@app.post("/predict", response_model=PredictResponse)
+@app.post("/predict")
 def predict(req: PredictRequest):
-    return PredictResponse(
-        income=120000 + req.client_id * 10,
-        confidence=0.85
-    )
+    row = data[data["id"] == req.client_id].iloc[0]
+
+    income = model.predict(row.to_frame().T)[0]
+
+    return {
+        "income": float(income),
+        "confidence": 0.85
+    }
 
 @app.post("/explain", response_model=ExplainResponse)
 def explain(req: ExplainRequest):
-    mock_features = [
-        {"name": "Возраст", "value": 30, "impact": 0.25},
-        {"name": "Траты", "value": 40000, "impact": -0.15},
-        {"name": "Скоринг", "value": 690, "impact": 0.10},
-    ]
-    return ExplainResponse(features=mock_features)
+    row = data[data["id"] == req.client_id].iloc[0]
+
+    result = explain_single_prediction(
+        explainer=explainer,
+        model=model,
+        x_row=row,
+        feature_names=feature_names,
+        feature_category=feature_category
+    )
+
+    return {
+        "prediction": result["prediction"],
+        "base_value": result["base_value"],
+        "features": result["contributions"]
+    }
+
 
 @app.post("/recommend", response_model=RecommendResponse)
 def recommend(req: RecommendRequest):
-    pred_income = 100_000
-    shap_explanation = None
-    features_row = {
-        "blacklist_flag": 0,
-        "total_sum": 0,
-        "hdb_bki_total_active_products": 2
-    }
-    rec = build_recommendations(
-        predicted_income=pred_income,
-        features_row=features_row,
-        shap_explanation=shap_explanation,
+    row = data[data["id"] == req.client_id].iloc[0]
+
+    predicted_income = float(model.predict(row.to_frame().T)[0])
+
+    shap_result = explain_single_prediction(
+        explainer=explainer,
+        model=model,
+        x_row=row,
+        feature_names=feature_names,
+        feature_category=feature_category,
+        top_k=40
     )
-    return RecommendResponse(products=rec["products"])
+
+    recommendations = build_recommendations(
+        predicted_income=predicted_income,
+        features_row=row.to_dict(),
+        shap_explanation=shap_result
+    )
+
+    return RecommendResponse(products=recommendations["products"])
