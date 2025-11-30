@@ -186,7 +186,7 @@ def explain_single_prediction(explainer,
                               x_row,
                               feature_names,
                               feature_category,
-                              top_k=10):
+                              top_k=40):
 
     X = x_row.to_frame().T
     shap_values = explainer.shap_values(X)[0]
