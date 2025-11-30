@@ -1,58 +1,70 @@
 import React, { useState } from "react";
-import ModelTabs from "./ModelTabs";
+import "./ShapExplanation.css";
+
+const TABS = [
+  { key: "income", label: "Доходы" },
+  { key: "risk", label: "Кредитный риск" },
+  { key: "salary", label: "Зарплата" },
+  { key: "behavior", label: "Поведение" },
+  { key: "spend_style", label: "Стиль трат" },
+  { key: "invest", label: "Инвестиции" },
+];
 
 export default function ShapExplanation({ features, loading }) {
-  const [category, setCategory] = useState("income");
+  const [category, setCategory] = useState("salary");
 
-  const filteredFeatures =
-    category === "income"
+  const filtered =
+    category === "salary"
       ? features
       : features.filter((f) => f.category === category);
 
   return (
-    <div className="card">
+    <div className="shap-card">
       <h2>Почему модель решила так?</h2>
 
-      {loading && <p>Считаем вклад признаков…</p>}
+      <div className="tabs-container">
+        {TABS.map((t) => (
+          <div
+            key={t.key}
+            className={
+              "tab-item " + (category === t.key ? "active" : "")
+            }
+            onClick={() => setCategory(t.key)}
+          >
+            {t.label}
+          </div>
+        ))}
+      </div>
 
-      {!loading && (!features || features.length === 0) && (
+      {loading && <p>Загрузка…</p>}
+      {!loading && filtered.length === 0 && (
         <p className="muted">
           Выберите клиента и дождитесь объяснения модели.
         </p>
       )}
 
-      {!loading && features && features.length > 0 && (
+      {!loading && filtered.length > 0 && (
         <div className="shap-list">
-          <ModelTabs
-            tabs={[
-              { label: "Доходы", value: "income" },
-              { label: "Кредитный риск", value: "risk" },
-              { label: "Зарплата", value: "salary" },
-              { label: "Поведение", value: "behavior" },
-              { label: "Стиль трат", value: "spending" },
-              { label: "Инвестиции", value: "invest" }
-            ]}
-            onChange={setCategory}
-          />
-          {features.map((f) => {
-            const width = Math.min(Math.abs(f.impact) * 100, 100); // impact в условных единицах 0–1
-            const sign = f.impact >= 0 ? "+" : "−";
+          {filtered.map((f) => {
+            const width = Math.min(Math.abs(f.impact) * 100, 100);
             return (
-              <div key={f.name} className="shap-row">
+              <div className="shap-row" key={f.name}>
                 <div className="shap-label">
                   <strong>{f.name}</strong>
-                  <span className="muted">значение: {String(f.value)}</span>
+                  <span className="muted">значение: {f.value}</span>
                 </div>
+
                 <div className="shap-bar-container">
                   <div
                     className={
                       "shap-bar " + (f.impact >= 0 ? "shap-pos" : "shap-neg")
                     }
-                    style={{ width: `${width}%` }}
+                    style={{ width: width + "%" }}
                   />
                 </div>
+
                 <div className="shap-impact">
-                  {sign}
+                  {f.impact >= 0 ? "+" : "−"}
                   {Math.abs(f.impact).toFixed(2)}
                 </div>
               </div>

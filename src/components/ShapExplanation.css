@@ -1,0 +1,96 @@
+.shap-card {
+  background: #ffffff;
+  border: 1px solid #e3e3e3;
+  border-radius: 40px;
+  padding: 32px 40px;
+  margin-bottom: 32px;
+  box-shadow: 0 4px 30px rgba(0,0,0,0.04);
+}
+
+.shap-card h2 {
+  text-align: center;
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 24px;
+  margin-top: 0;
+}
+
+.tabs-container {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+  padding: 10px;
+  background: #f4f4f6;
+  border-radius: 40px;
+}
+
+.tab-item {
+  font-size: 18px;
+  padding: 18px 40px;
+  border-radius: 40px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.tab-item:not(.active) {
+  background: transparent;
+  color: #222;
+}
+
+.tab-item.active {
+  background: #111;
+  color: #fff;
+}
+
+.shap-list {
+  margin-top: 24px;
+}
+
+.shap-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.shap-label {
+  width: 260px;
+  font-size: 18px;
+}
+
+.shap-label .muted {
+  color: #777;
+  font-size: 16px;
+  margin-left: 4px;
+}
+
+.shap-bar-container {
+  flex: 1;
+  height: 14px;
+  background: #e3e3e3;
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 0 20px;
+}
+
+.shap-bar {
+  height: 100%;
+  border-radius: 10px;
+}
+
+.shap-pos {
+  background: #61d26a;
+}
+
+.shap-neg {
+  background: #d64545;
+}
+
+.shap-impact {
+  width: 60px;
+  font-size: 18px;
+  font-weight: 700;
+  text-align: right;
+}
